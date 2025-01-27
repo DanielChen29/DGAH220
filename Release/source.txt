@@ -1,0 +1,172 @@
+"Morning Routine" by Daniel Chen
+
+Release along with an interpreter, a website, and the source text
+
+When play begins: say "Mondays... so full of promise."
+
+The Bedroom is a room. "[if the player is on the bed]The bed is so warm and the air so cold, but you need to get to class. Your alarm continues to buzz as you rub the sleep out of your eyes. You'll need to get out of bed to turn it off.[otherwise]Your bedroom is sparse with a desk, a closet, and of course your bed.[end if]"
+
+The Hallway is a room. "The short hallway stretches before you with the doors to your housemate's rooms and the bathroom (west), as well as the front door (north), and the living room (east)."
+
+The Bathroom is a room. "Dirtier than it has been but cleaner than it could be. And you're a glass half full kind of person anyway. There's a toilet and shower here but they're separate from the sink and the door is locked, someone's using it. Guess you'll have to wait..."
+
+The Living Room is a room. "The room is certainly lived in. Someone's gotta tidy up all this clutter. Nobi is there, but you aren't used to seeing him in the morning as he's usually left for class by now..."
+
+The Foyer is a room. "There are a mess of shoes, few of them on the dedicated rack, but you guess they're better here than on people's feet tracking dirt into the already less than pristine abode. Ryan is here. It seems like he just got in and took off his shoes. Now he's just hanging out."
+
+The Street is a room. "Time to get to class"
+
+The bedroom door is a door. The bedroom door is north of the Bedroom and south of the Hallway. The description of the bedroom door is "The door leads north to the hallway"
+
+The front door is a door. The front door is north of the hallway and south of the Street.
+
+The bed is an enterable supporter in the Bedroom. The player is on the bed.
+
+Understand "get out of bed" as exiting
+
+Instead of doing anything other than looking or exiting or getting off when the player is on the bed:
+    say "You really need to get out of bed first."
+
+After getting off the bed:
+    say "You force yourself to roll out of the warm covers."
+
+The chair is an enterable supporter in the Bedroom. The description is "You don't have time to sit down, class starts soon."
+
+The desk is a supporter in the Bedroom. It is fixed in place. The description of the desk is "Theres a neat mess atop the desk including your phone, alarm at full blast. You put it out of reach of the bed so you would be forced to get up in the morning."
+
+The phone is on the desk. The description of the phone is "Your trusty screen, what would you do without it?"
+
+The phone has a truth state called alarm-active. The alarm-active of the phone is true.
+
+Instead of examining the phone when the alarm-active of the phone is true:
+	say "Better turn this alarm off before it wakes the roomates."
+
+Understand "alarm" as the phone.
+Understand "turn off [something]" as switching off.
+Understand "silence [something]" as switching off.
+
+Instead of switching off the phone when the alarm-active of the phone is true and the player can touch the phone:
+    now the alarm-active of the phone is false;
+    say "You turn off the blaring alarm. Peace at last."
+
+Before switching off the phone when the player is on the bed:
+    say "You can't reach the phone from bed." instead.
+
+Instead of switching off the phone when the alarm-active of the phone is false:
+    	say "The alarm is already off."
+
+Every turn when the alarm-active of the phone is true:
+    	say "The alarm continues to buzz insistently."
+
+The closet is an openable closed container in the Bedroom. In the closet is a outfit. The outfit is wearable
+
+Before opening the closet when the player is on the bed:
+    say "You can't reach the closet from bed." instead.
+
+The Bathroom is west of the Hallway
+
+The sink is a supporter in the Bathroom. It is fixed in place.
+
+The toothbrush is on the sink.
+
+Brushing is an action applying to one thing. 
+
+Understand "brush teeth with [something]" as brushing.
+Understand "use [something] to brush teeth" as brushing.
+
+The player has a truth state called teeth-brushed. The teeth-brushed of the player is false.
+
+Carry out brushing the toothbrush:
+	if teeth-brushed of the player is false:
+		now teeth-brushed of the player is true;
+		say "You brush the sleep-taste out of your mouth.";
+	else:
+		say "Overbrushing can lead to enamel decay."
+		
+Instead of going to the Street:
+	if the alarm-active of the phone is true:
+		say "You never turned off your alarm. You better go back and silence it before it wakes your roomates" instead;
+	if the player is not wearing the outfit:
+		end the story saying "Going to class in your underwear is an interesting choice";
+	else if teeth-brushed of the player is false:
+		end the story saying "You made it to class, but don't get up close and personal with anyone, your breath stinks!";
+	else if the player does not carry the phone:
+		end the story saying "All ready but without your phone. Good for you for leaving the screen behind today.";
+	else:
+		end the story saying "Outfit sharp and breath fresh, it's time for class.";
+		
+The Living Room is east of the Hallway.
+
+Nobi is a person in the Living Room. Nobi has a number called lateness. The lateness of Nobi is 0. Nobi has a truth state called been-greeted. The been-greeted of Nobi is false
+
+Interrogative is a kind of value. The interrogatives are who, what, when, where, how, any, and why.
+
+Current question is an interrogative that varies.
+
+After asking someone about something: respond to the question. After answering someone that something: respond to the question.
+
+After going to the Living Room:
+	if the alarm-active of the phone is true:		
+		say "Nobi doesn't acknowledge your presence, but mutters 'I wish people would turn their alarms off more promptly,' while staring intently at his phone.'";
+	continue the action.
+
+
+After telling someone about something: say "'That's really cool!' he says, though you're not sure if he was actually listening"
+
+Greeting is an action applying to one thing. Understand "say hello to [someone]" or "hello [someone]" or "hi [someone]" or "say hi [someone]" or "say hello [someone]" as greeting.
+
+Instead of greeting Nobi:
+	if the alarm-active of the phone is true:
+		say "Nobi doesn't respond, he seems peeved that you haven't turned your alarm off yet.";
+	else:
+		say "Nobi looks up from his phone, brightens, and says hi";
+		now the been-greeted of Nobi is true;
+
+Table of Nobi
+topic	question type	reply
+"class/school"	what	"'Japanese class starts soon but I don't want to go'"
+"class/school"	why	"'Classes are dumb anyway I just want to stay here and scroll'"
+"class/school"	where	"'My class is all the way in Willis, there's no way I'll get there in time.'"
+"japanese"	what	"'it's my first 200 level japanese class and it's really hard"
+"weather/cold"	what	"'It looks really cold out there today'"
+"phone"	what	"'I love my phone, these reels are so funny!' He looks down and giggles"
+"joke"	any	"'I know a good joke. Why did the chicken cross the road? To get to the other side! Do you get it?'"
+"study/midterm/exam"	what	"'I have a midterm tomorrow but it's so hard to study when my phone is so much more interesting.'"
+"food/breakfast/ramen"	what	"'I was gonna make ramen but I have to get to class soon so I might just have to skip breakfast'"
+"food/breakfast/ramen"	why	"'I was about to start making ramen and then this awesome reel just popped up on my phone out of nowhere.'"
+"exercise/lifting/practice"	when	"'I lifted this morning, basically just did a bunch of squats.'"
+"exercise/lifting/practice"	why	"'I gotta keep squating so I can be strong.'"
+
+After reading a command:	
+	if the player's command includes "[interrogative]", now the current question is the interrogative understood.
+
+To respond to the question:
+	if the alarm-active of the phone is true:
+		say "Nobi doesn't respond, he seems peeved that you haven't turned your alarm off yet.";
+	else if the been-greeted of Nobi is false and the alarm-active of the phone is false:
+		say "Nobi keeps looking at his phone. He doesn't seem to have heard you.";
+	else if Nobi is in the Living Room:
+		let found match be false;
+		repeat through the Table of Nobi:
+			if the topic understood includes topic entry:
+				if the current question is the question type entry:
+					say "[reply entry][paragraph break]";
+					increment the lateness of nobi;
+					now found match is true;
+					rule succeeds;
+		if found match is false:
+			repeat through the Table of Nobi:
+				if the topic understood includes topic entry:
+					if the question type entry is any:
+						say "[reply entry][paragraph break]";
+						increment the lateness of nobi;
+						rule succeeds;
+		say "Nobi doesn't respond. He either didn't understand or is too distracted by reels";
+		increment the lateness of nobi;
+	
+Every turn:
+	if the lateness of Nobi is 5 and Nobi is in the Living Room:
+		say "Nobi begrudgingly gets up and says 'okay I guess I should get to class... I've already missed it twice this term and it's only been two weeks!' He picks up his stuff and leaves out the front door.";
+		move Nobi to Outside;
+
+Understand "ask [someone] [text]" as asking it about.
