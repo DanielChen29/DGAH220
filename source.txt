@@ -6,29 +6,34 @@ When play begins: say "Mondays... so full of promise."
 
 The Bedroom is a room. "[if the player is on the bed]The bed is so warm and the air so cold, but you need to get to class. Your alarm continues to buzz as you rub the sleep out of your eyes. You'll need to get out of bed to turn it off.[otherwise]Your bedroom is sparse with a desk, a closet, and of course your bed.[end if]"
 
-The Hallway is a room. "The short hallway stretches before you with the doors to your housemate's rooms and the bathroom (west), as well as the front door (north), and the living room (east)."
+The Hallway is a room. "The short hallway stretches before you with the doors to your housemate's rooms and the bathroom (west), as well as the front door (north), and the living room (east). The walls used to be sparse but you and your housemates decorated recently."
 
 The Bathroom is a room. "Dirtier than it has been but cleaner than it could be. And you're a glass half full kind of person anyway. There's a toilet and shower here but they're separate from the sink and the door is locked, someone's using it. Guess you'll have to wait..."
 
 The Living Room is a room. "The room is certainly lived in. Someone's gotta tidy up all this clutter. Nobi is there, but you aren't used to seeing him in the morning as he's usually left for class by now..."
 
-The Foyer is a room. "There are a mess of shoes, few of them on the dedicated rack, but you guess they're better here than on people's feet tracking dirt into the already less than pristine abode. Ryan is here. It seems like he just got in and took off his shoes. Now he's just hanging out."
+The Foyer is a room. "There are a mess of shoes, few of them on the dedicated rack, but you guess they're better here than on people's feet tracking dirt into the already less than pristine abode. Ryan is here. It seems like he just got back from class and took off his shoes. Now he's just hanging out."
 
 The Street is a room. "Time to get to class"
 
 The bedroom door is a door. The bedroom door is north of the Bedroom and south of the Hallway. The description of the bedroom door is "The door leads north to the hallway"
 
-The front door is a door. The front door is north of the hallway and south of the Street.
+The front door is a door. The front door is north of the Foyer and south of the Street.
 
 The bed is an enterable supporter in the Bedroom. The player is on the bed.
 
 Understand "get out of bed" as exiting
 
+Understand "get in bed" as entering
+
 Instead of doing anything other than looking or exiting or getting off when the player is on the bed:
-    say "You really need to get out of bed first."
+	say "You really need to get out of bed first."
 
 After getting off the bed:
-    say "You force yourself to roll out of the warm covers."
+	say "You force yourself to roll out of the warm covers."
+
+Instead of entering the bed:
+	end the story saying "You crawl back into the warm sheets and quickly fall asleep. You won't be making it to class on this fine morning."
 
 The chair is an enterable supporter in the Bedroom. The description is "You don't have time to sit down, class starts soon."
 
@@ -110,8 +115,7 @@ After going to the Living Room:
 		say "Nobi doesn't acknowledge your presence, but mutters 'I wish people would turn their alarms off more promptly,' while staring intently at his phone.'";
 	continue the action.
 
-
-After telling someone about something: say "'That's really cool!' he says, though you're not sure if he was actually listening"
+After telling Nobi about something: say "'That's really cool!' he says, though you're not sure if he was actually listening"
 
 Greeting is an action applying to one thing. Understand "say hello to [someone]" or "hello [someone]" or "hi [someone]" or "say hi [someone]" or "say hello [someone]" as greeting.
 
@@ -126,7 +130,7 @@ Table of Nobi
 topic	question type	reply
 "class/school"	what	"'Japanese class starts soon but I don't want to go'"
 "class/school"	why	"'Classes are dumb anyway I just want to stay here and scroll'"
-"class/school"	where	"'My class is all the way in Willis, there's no way I'll get there in time.'"
+"class/school"	where	"'My class is all the way in Willis. There's no way I'll get there in time.'"
 "japanese"	what	"'it's my first 200 level japanese class and it's really hard"
 "weather/cold"	what	"'It looks really cold out there today'"
 "phone"	what	"'I love my phone, these reels are so funny!' He looks down and giggles"
@@ -134,35 +138,8 @@ topic	question type	reply
 "study/midterm/exam"	what	"'I have a midterm tomorrow but it's so hard to study when my phone is so much more interesting.'"
 "food/breakfast/ramen"	what	"'I was gonna make ramen but I have to get to class soon so I might just have to skip breakfast'"
 "food/breakfast/ramen"	why	"'I was about to start making ramen and then this awesome reel just popped up on my phone out of nowhere.'"
-"exercise/lifting/practice"	when	"'I lifted this morning, basically just did a bunch of squats.'"
+"exercise/lifting/practice"	when	"'I lifted this morning. I Basically just did a bunch of squats.'"
 "exercise/lifting/practice"	why	"'I gotta keep squating so I can be strong.'"
-
-After reading a command:	
-	if the player's command includes "[interrogative]", now the current question is the interrogative understood.
-
-To respond to the question:
-	if the alarm-active of the phone is true:
-		say "Nobi doesn't respond, he seems peeved that you haven't turned your alarm off yet.";
-	else if the been-greeted of Nobi is false and the alarm-active of the phone is false:
-		say "Nobi keeps looking at his phone. He doesn't seem to have heard you.";
-	else if Nobi is in the Living Room:
-		let found match be false;
-		repeat through the Table of Nobi:
-			if the topic understood includes topic entry:
-				if the current question is the question type entry:
-					say "[reply entry][paragraph break]";
-					increment the lateness of nobi;
-					now found match is true;
-					rule succeeds;
-		if found match is false:
-			repeat through the Table of Nobi:
-				if the topic understood includes topic entry:
-					if the question type entry is any:
-						say "[reply entry][paragraph break]";
-						increment the lateness of nobi;
-						rule succeeds;
-		say "Nobi doesn't respond. He either didn't understand or is too distracted by reels";
-		increment the lateness of nobi;
 	
 Every turn:
 	if the lateness of Nobi is 5 and Nobi is in the Living Room:
@@ -170,3 +147,84 @@ Every turn:
 		move Nobi to Outside;
 
 Understand "ask [someone] [text]" as asking it about.
+
+The Foyer is north of the Hallway
+
+Ryan is a person in the Foyer. Ryan has a truth state called been-greeted. the been-greeted of Ryan is false.
+
+Instead of greeting Ryan:
+	if the alarm-active of the phone is true:
+		say "'Hey! How's it going? Ryan asks... then follows with 'huh sounds like someone left their alarm on downstairs.'";
+		now the been-greeted of Ryan is true;
+	else:
+		say "'What's up!' Ryan says exhuberantly. He smiles wide and has a twinkle in his eye.";
+		now the been-greeted of Ryan is true;
+		
+Table of Ryan
+topic	question type	reply
+"class/school/work"	what	"'I just got back from class. It was sculpture and I was making all kinds of things,' Ryan says. 'I kind of like art classes but they can be a lot of work.'"
+"class/school/work"	how	"'Sculpture is pretty chill. We get to work with clay and other materials. The professor is really laid back too.'"
+"class/school/work"	when	"'I have sculpture class early in the morning. Like, way too early,' Ryan sighs. 'But at least I'm done for the day!'"
+"phone/screen/tiktok"	what	"'I'm really happy to be back home. No more classes for the day so I can just lay on my bed and scroll. Living the dream!'"
+"phone/screen/tiktok"	why	"'Sometimes you just need to zone out and watch some videos, you know? It's a good way to decompress.'"
+"day/morning"	how	"'I had a good morning but I'm happy to be back. I might take a nap in a bit. It sucks having early classes but it's nice having the rest of the day to relax I guess.'"
+"food/breakfast/lunch"	what	"'I was thinking of heading to the kitchen in a bit. I'm starving! I might just make some ramen or something easy. I could really go for a burger, though.'"
+"food/breakfast/lunch"	when	"'Probably in a little bit. Just trying to motivate myself to get up first!'"
+"weekend"	what	"'I'm so glad it's almost the weekend. I don't have any big plans yet, but I might just binge a show or hang out with some friends. What about you?'"
+"weekend"	when	"'Friday can't come soon enough! Just gotta get through a couple more days.'"
+"room/messy/clean"	what	"'Yeah, I know my side of the room's a bit messy.' *laughs* 'I'll get to it eventually. Probably.'"
+"room/messy/clean"	why	"'Honestly? I've just been too lazy to clean. Plus I kind of know where everything is in this organized chaos.'"
+"sleep/nap"	why	"'Honestly, I could just crawl into bed right now. These early classes are killing me! Naps are underrated, man.'"
+"sleep/nap"	when	"'Probably gonna take a nap soon. These early morning classes really take it out of you.'"
+"music/tunes/headphones"	what	"'I've been listening to this new artist lately. Their stuff is so chill. Want me to send you a link? You might like it.'"
+"music/tunes/headphones"	why	"'It helps me focus when I'm studying, plus some of the beats are just really good for vibing.'"
+"workout/lift/exercise" 	what	"'I think I might hit the gym later but I'm pretty tired right now.'"
+"workout/lift/exercise"	when	"'Usually I try to go in the afternoon, but today I might skip. Still recovering from yesterday's leg day.'"
+
+After reading a command:	
+	if the player's command includes "[interrogative]", now the current question is the interrogative understood.
+
+To respond to the question:
+	if player is in the Foyer:
+		if the been-greeted of Ryan is false:
+			say "'Oh hey!' Ryan says. 'I didn't see you there'.";
+			now the been-greeted of Ryan is true;
+		let found match be false;
+		repeat through the Table of Ryan:
+			if the topic understood includes topic entry:
+				if the current question is the question type entry:
+					say "[reply entry][paragraph break]";
+					now found match is true;
+					rule succeeds;
+		if found match is false:
+			repeat through the Table of Ryan:
+				if the topic understood includes topic entry:
+					if the question type entry is any:
+						say "[reply entry][paragraph break]";
+						rule succeeds;
+		say "Ryan doesn't respond, you're not sure if he heard you.";
+	else if player is in the Living Room:
+		if the alarm-active of the phone is true:
+			say "Nobi doesn't respond, he seems peeved that you haven't turned your alarm off yet.";
+		else if the been-greeted of Nobi is false and the alarm-active of the phone is false:
+			say "Nobi keeps looking at his phone. He doesn't seem to have heard you.";
+		else if Nobi is in the Living Room:
+			let found match be false;
+			repeat through the Table of Nobi:
+				if the topic understood includes topic entry:
+					if the current question is the question type entry:
+						say "[reply entry][paragraph break]";
+						increment the lateness of nobi;
+						now found match is true;
+						rule succeeds;
+			if found match is false:
+				repeat through the Table of Nobi:
+					if the topic understood includes topic entry:
+						if the question type entry is any:
+							say "[reply entry][paragraph break]";
+							increment the lateness of nobi;
+							rule succeeds;
+			say "Nobi doesn't respond. He either didn't understand or is too distracted by reels";
+			increment the lateness of nobi;
+	else:
+		say "talking to yourself is normal but don't start expecting a response..."
