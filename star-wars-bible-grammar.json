@@ -1,0 +1,98 @@
+{
+  "origin": [
+    "#verse1#",
+    "#verse2#",
+    "#verse3#",
+    "#verse4#",
+    "#verse5#"
+  ],
+  "title": [
+    "#organizations# #first#:#second#"
+  ],
+  "first": [
+    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+  ],
+  "second" : [
+    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+    "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+    "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+    "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
+    "41", "42", "43", "44", "45", "46", "47", "48", "49", "50"
+  ],
+  "verse1": [
+    "And lo, #characters# did #force_powers# with great #forces_concepts#, and all who witnessed did #speech#."
+  ],
+  "verse2": [
+    "In those days, #characters# came from #planets# to #mechanical# the #technology#."
+  ],
+  "verse3": [
+    "Behold, the #organizations# shall #combat# against the forces of #organizations#, and their #vehicles# shall #movement# across the skies of #planets#."
+  ],
+  "verse4": [
+    "The #species# #speech# unto the #characters#, '#forces_concepts# be with you as you #movement# through the valley of #planets#.'"
+  ],
+  "verse5": [
+    "And #characters# took up their #weapons# and did #combat# with the servants of the #organizations#, for such was the way of the #forces_concepts#."
+  ],
+  "characters": [
+    "Luke Skywalker", "Darth Vader", "Yoda", "Leia Organa", "Han Solo", "Obi-Wan Kenobi",
+    "Palpatine", "Boba Fett", "Kylo Ren", "Rey", "Finn", "Poe Dameron", "Mace Windu",
+    "Qui-Gon Jinn", "Lando Calrissian", "Ahsoka Tano", "Grand Moff Tarkin"
+  ],
+  "planets": [
+    "Tatooine", "Coruscant", "Endor", "Hoth", "Naboo", "Mustafar", "Dagobah", "Kashyyyk",
+    "Kamino", "Geonosis", "Jakku", "Scarif", "Dathomir", "Mandalore", "Jedha", "Ahch-To", "Crait"
+  ],
+  "species": [
+    "Wookiee", "Twi'lek", "Rodian", "Ewok", "Mon Calamari", "Jawa", "Hutt", "Zabrak",
+    "Chiss", "Togruta", "Gungan", "Bothan", "Duros", "Nautolan", "Ithorian", "Kel Dor"
+  ],
+  "vehicles": [
+    "X-wing", "TIE Fighter", "Millennium Falcon", "Star Destroyer", "AT-AT", "AT-ST",
+    "Slave I", "Imperial Shuttle", "Speeder Bike", "Podracer", "Y-wing", "B-wing",
+    "A-wing", "Lambda-class Shuttle", "Droid Starfighter"
+  ],
+  "weapons": [
+    "Lightsaber", "Blaster", "Thermal Detonator", "Bowcaster", "Vibroblade", "Electrostaff",
+    "DL-44", "E-11 Blaster Rifle", "Gaffi Stick", "Ion Blaster", "Force Pike",
+    "DC-17 Blaster", "Flechette Launcher", "Z-6 Rotary Blaster Cannon"
+  ],
+  "organizations": [
+    "Jedi Order", "Sith", "Galactic Empire", "Rebel Alliance", "First Order", "Resistance",
+    "Mandalorians", "Trade Federation", "Separatists", "New Republic", "Knights of Ren",
+    "Black Sun", "Crimson Dawn", "The Hutt Cartel"
+  ],
+  "technology": [
+    "Holocron", "Hyperdrive", "R2-D2", "C-3PO", "Astromech Droid", "Protocol Droid",
+    "Bacta Tank", "HoloNet", "Gonk Droid", "Comm Link", "Shield Generator", "Scomp Link",
+    "Fusion Cutter", "Bounty Hunter Tracker"
+  ],
+  "forces_concepts": [
+    "The Force", "Dark Side", "Light Side", "Midichlorians", "Force Ghost", "Sith Lord",
+    "Padawan", "Master", "The High Ground", "Jedi Mind Trick", "Balance of the Force",
+    "The Chosen One", "Grey Jedi", "Force Vision"
+  ],
+  "combat": [
+    "duel", "strike", "parry", "defend", "attack", "ambush", "clash", "counter", "feint",
+    "disarm", "lunge", "evade", "block", "riposte", "thrust", "engage", "subdue"
+  ],
+  "force_powers": [
+    "push", "pull", "choke", "sense", "manipulate", "enlighten", "levitate", "mind control",
+    "force jump", "force speed", "force heal", "force shield", "battle meditation",
+    "force crush", "dark side corruption", "tutaminis"
+  ],
+  "movement": [
+    "fly", "jump", "dash", "sneak", "march", "retreat", "sidestep", "roll", "dodge",
+    "vault", "scale", "climb", "sprint", "glide", "evade", "pivot", "maneuver"
+  ],
+  "speech": [
+    "command", "negotiate", "persuade", "deceive", "whisper", "shout", "boast", "implore",
+    "dictate", "proclaim", "explain", "warn", "inspire", "dissuade", "mock", "banter",
+    "declare"
+  ],
+  "mechanical": [
+    "pilot", "repair", "assemble", "modify", "calibrate", "navigate", "tune", "reconfigure",
+    "rewire", "construct", "program", "debug", "overhaul", "stabilize", "enhance",
+    "upgrade", "fine-tune"
+  ]
+}

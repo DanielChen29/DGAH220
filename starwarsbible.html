@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracery Star Wars Generator</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="p5.min.js"></script>
+    <script src="tracery.min.js"></script>
+    <style>
+        body {
+            background-color: black;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: gold;
+            font-family: 'Papyrus', fantasy;
+            font-weight: bold;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+
+        #output {
+            background-color: tan;
+            border: 2px solid #8B4513;
+            padding: 20px;
+            margin: 20px auto;
+            width: 50%;
+            min-height: 100px;
+            box-shadow: 0 0 20px #8B4513;
+            font-size: 1.2em;
+            font-family: 'Papyrus', fantasy;
+            border-radius: 10px;
+            background-image: url('parchment-texture.png');
+            background-size: cover;
+        }
+
+        canvas {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Generated Star Wars Text</h1>
+    <p id="output"></p>
+
+    <script>
+        $(document).ready(function() {
+            $.getJSON("star-wars-bible-grammar.json", function(grammarData) {
+                var grammar = tracery.createGrammar(grammarData);
+                var result = grammar.flatten("#origin#");
+                var title = grammar.flatten("#title#");
+                $("#title").text(title);
+                $("#output").text(result);
+            }).fail(function() {
+                $("#output").text("Failed to load grammar.");
+            });
+        });
+
+        let planetX;
+        let planetColor;
+        let landColor;
+
+        function setup() {
+            createCanvas(400, 400).parent(document.body);
+            planetX = -100;
+            randomizeColors();
+        }
+
+        function draw() {
+            background(20);
+            translate(planetX, height / 2);
+
+            // Draw planet
+            fill(planetColor);
+            stroke(44, 62, 80);
+            strokeWeight(3);
+            ellipse(0, 0, 200, 200);
+
+            // Draw landmasses
+            drawLandmass(-40, -20);
+            drawLandmass(30, 50);
+            drawLandmass(30, -50);
+
+            // Move the planet
+            planetX += 2;
+            if (planetX > width + 100) {
+                planetX = -100;
+                randomizeColors();
+            }
+        }
+
+        function drawLandmass(x, y) {
+            let vertices = [
+                { x: -40, y: -10 }, { x: -10, y: -20 }, { x: 10, y: -15 },
+                { x: 15, y: 0 }, { x: 10, y: 15 }, { x: -10, y: 20 },
+                { x: -35, y: 10 }
+            ];
+            
+            fill(landColor);
+            stroke(39, 174, 96);
+            strokeWeight(2);
+            beginShape();
+            for (let v of vertices) {
+                vertex(x + v.x, y + v.y);
+            }
+            endShape(CLOSE);
+        }
+
+        function randomizeColors() {
+            planetColor = color(random(0, 255), random(0, 255), random(0, 255));
+            landColor = color(random(0, 255), random(0, 255), random(0, 255));
+        }
+    </script>
+</body>
+</html>
