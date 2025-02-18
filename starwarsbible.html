@@ -67,7 +67,7 @@
 
         function setup() {
             createCanvas(400, 400).parent(document.body);
-            planetX = -100;
+            planetX = -400;
             randomizeColors();
         }
 
@@ -88,7 +88,7 @@
 
             // Move the planet
             planetX += 2;
-            if (planetX > width + 100) {
+            if (planetX > width + 400) {
                 planetX = -100;
                 randomizeColors();
             }
