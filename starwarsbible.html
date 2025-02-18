@@ -50,6 +50,7 @@
 
     <script>
         $(document).ready(function() {
+            <!-- Sources used: Scripts from the original star wars movies as well as some additional terms. The king James Bible-->
             $.getJSON("star-wars-bible-grammar.json", function(grammarData) {
                 var grammar = tracery.createGrammar(grammarData);
                 var result = grammar.flatten("#origin#");
@@ -112,9 +113,4 @@
         }
 
         function randomizeColors() {
-            planetColor = color(random(0, 255), random(0, 255), random(0, 255));
-            landColor = color(random(0, 255), random(0, 255), random(0, 255));
-        }
-    </script>
-</body>
-</html>
+            planetColor = color(random(0, 255), random(0, 2
